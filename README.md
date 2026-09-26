@@ -11,6 +11,7 @@ Only these six items are needed to run the application:
 - `requirements.txt`
 - `README.md`
 - `run_app.bat` (one-click launcher)
+- `runtime.txt` (Streamlit Cloud Python version)
 - `sample_data/` (optional examples)
 
 The test and planning files are supporting material, not part of the application flow. The `.venv` folder is a local Python environment and is hidden from the VS Code Explorer.
@@ -22,6 +23,7 @@ OCR_Image_Scanner/
 ├── requirements.txt       # Python packages needed to run it
 ├── README.md              # Setup and interview explanation
 ├── run_app.bat             # Simple application launcher
+├── runtime.txt              # Uses Python 3.12 in Streamlit Cloud
 ├── tests/
 │   └── test_app.py        # Simple startup test
 └── sample_data/           # Example images for testing
@@ -114,3 +116,17 @@ A future version could add multilingual OCR, PDF support, batch processing, conf
 Images are processed locally. The MVP supports one image at a time and is intended for printed text. The current description reports orientation, size, and whether text was detected; it does not identify objects such as receipts or handwritten notes.
 
 The product requirements remain in [OCR_Image_to_Text_PRD_AntiGravity.md](OCR_Image_to_Text_PRD_AntiGravity.md), and the detailed plan remains in [OCR_Image_to_Text_Implementation_Plan.md](OCR_Image_to_Text_Implementation_Plan.md).
+
+## Deploy on Streamlit Cloud
+
+The repository includes `runtime.txt` to use Python 3.12. This avoids the OpenCV import problem that can occur with Python 3.14 and RapidOCR.
+
+After adding or changing deployment files:
+
+```powershell
+git add .
+git commit -m "Fix Streamlit Cloud Python version"
+git push
+```
+
+In Streamlit Cloud, open **Manage app**, then select **Reboot app** or **Redeploy**. Set the main file to `app.py` and wait for dependencies to reinstall.
