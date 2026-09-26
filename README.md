@@ -129,4 +129,4 @@ git commit -m "Fix Streamlit Cloud Python version"
 git push
 ```
 
-In Streamlit Cloud, open **Manage app**, then select **Reboot app** or **Redeploy**. Set the main file to `app.py` and wait for dependencies to reinstall.
+In Streamlit Cloud, set the main file to `app.py` and deploy from the latest `main` branch. Because changing Python versions requires a fresh environment, delete the existing app from **Manage app** and create it again if **Reboot** still shows Python 3.14. Wait for dependencies to reinstall before testing OCR.

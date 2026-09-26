@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import sys
+
 import streamlit as st
 
 from ocr_logic import (
@@ -21,6 +23,15 @@ def get_ocr_model():
 
 def main() -> None:
     st.set_page_config(page_title="OCR Text Scanner", page_icon="🔎", layout="wide")
+
+    if sys.version_info[:2] != (3, 12):
+        st.error(
+            "This deployment requires Python 3.12. "
+            f"The current environment is Python {sys.version_info.major}.{sys.version_info.minor}. "
+            "Update runtime.txt and redeploy the app."
+        )
+        st.stop()
+
     st.title("OCR Text Scanner")
     st.write("Upload an image, scan its text locally, and download the result.")
 
