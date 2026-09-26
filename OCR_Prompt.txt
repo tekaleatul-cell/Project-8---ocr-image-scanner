@@ -1,0 +1,1 @@
+I want to create a simple project based on an OCR model, which will be recognizing the text from the image. Create a PRM in MD format  (markdown format), so that I can give that to anti-gravity. It will implement my project format in step-by-step, phase-wise execution. This project UI will be on Streamlit, so make sure we are using Streamlit UI fundamentals.
