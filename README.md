@@ -12,6 +12,7 @@ Only these six items are needed to run the application:
 - `README.md`
 - `run_app.bat` (one-click launcher)
 - `runtime.txt` (Streamlit Cloud Python version)
+- `packages.txt` (Linux libraries required by OpenCV)
 - `sample_data/` (optional examples)
 
 The test and planning files are supporting material, not part of the application flow. The `.venv` folder is a local Python environment and is hidden from the VS Code Explorer.
@@ -24,6 +25,7 @@ OCR_Image_Scanner/
 ├── README.md              # Setup and interview explanation
 ├── run_app.bat             # Simple application launcher
 ├── runtime.txt              # Uses Python 3.12 in Streamlit Cloud
+├── packages.txt             # Linux libraries for RapidOCR/OpenCV
 ├── tests/
 │   └── test_app.py        # Simple startup test
 └── sample_data/           # Example images for testing
@@ -119,7 +121,7 @@ The product requirements remain in [OCR_Image_to_Text_PRD_AntiGravity.md](OCR_Im
 
 ## Deploy on Streamlit Cloud
 
-The repository includes `runtime.txt` to use Python 3.12. This avoids the OpenCV import problem that can occur with Python 3.14 and RapidOCR.
+The repository includes `runtime.txt` to use Python 3.12 and `packages.txt` to install the Linux libraries required by RapidOCR/OpenCV.
 
 After adding or changing deployment files:
 
@@ -129,4 +131,4 @@ git commit -m "Fix Streamlit Cloud Python version"
 git push
 ```
 
-In Streamlit Cloud, set the main file to `app.py` and deploy from the latest `main` branch. Because changing Python versions requires a fresh environment, delete the existing app from **Manage app** and create it again if **Reboot** still shows Python 3.14. Wait for dependencies to reinstall before testing OCR.
+In Streamlit Cloud, set the main file to `app.py` and deploy from the latest `main` branch. Because runtime and system-package changes require a fresh environment, delete the existing app from **Manage app** and create it again if necessary. Wait for dependencies and Linux packages to install before testing OCR.

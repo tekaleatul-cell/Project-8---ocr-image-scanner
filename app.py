@@ -59,14 +59,14 @@ def main() -> None:
     preview_col, result_col = st.columns(2)
     with preview_col:
         st.subheader("Uploaded image")
-        st.image(image, use_container_width=True)
+        st.image(image, width="stretch")
         st.caption(f"{uploaded_file.name} · {image.width} x {image.height} pixels")
 
         scan_col, reset_col = st.columns(2)
         with scan_col:
-            scan_clicked = st.button("Scan Text", type="primary", use_container_width=True)
+            scan_clicked = st.button("Scan Text", type="primary", width="stretch")
         with reset_col:
-            reset_clicked = st.button("Reset", use_container_width=True)
+            reset_clicked = st.button("Reset", width="stretch")
 
         if reset_clicked:
             st.session_state.pop("scan_result", None)
@@ -77,8 +77,11 @@ def main() -> None:
             with st.spinner("Scanning image..."):
                 try:
                     st.session_state.scan_result = scan_text(image, get_ocr_model())
-                except (OSError, RuntimeError, ValueError):
-                    st.error("The OCR engine could not process this image.")
+                except (ImportError, OSError, RuntimeError, ValueError):
+                    st.error(
+                        "The OCR engine could not start. "
+                        "Please check the deployment dependencies and try again."
+                    )
 
     with result_col:
         st.subheader("Image description")
@@ -100,7 +103,7 @@ def main() -> None:
                 data=edited_text.encode("utf-8"),
                 file_name="extracted-text.txt",
                 mime="text/plain",
-                use_container_width=True,
+                width="stretch",
             )
             st.caption(
                 f"{result.word_count} words · {result.character_count} characters · "
